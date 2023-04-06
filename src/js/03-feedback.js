@@ -28,10 +28,16 @@ const data = {
 };
 
 const STORAGE_KEY = 'feedback-form-state';
+const storedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+if (storedData) {
+  data.input.value = storedData.email;
+  data.textarea.value = storedData.message;
+}
+
 
 data.form.addEventListener('submit', onSubmit);
-data.input.addEventListener('input', throttle(getUserData, 500));
-data.textarea.addEventListener('input', throttle(getUserData, 500));
+data.form.addEventListener('input', throttle(getUserData, 500));
 
 const userData = { email: '', message: '' };
 
@@ -57,8 +63,8 @@ function onSubmit(event) {
 }
 
 function getUserData(event) {
-  userData.email = data.input.value;
-  userData.message = data.textarea.value;
+  userData.email = data.form.elements.email.value;
+  userData.message = data.form.elements.message.value;
 
   saveData();
 }
