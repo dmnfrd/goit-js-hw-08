@@ -73,18 +73,3 @@ function saveData() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(userData));
 }
 
-data.form.addEventListener('submit', saveEmail);
-
-function saveEmail(event) {
-  event.preventDefault();
-
-  const inputEmail = data.form.elements.email.value;
-  const inputMessage = data.form.elements.message.value;
-  if (inputEmail && inputMessage) {
-    let userForm = localStorage.getItem(STORAGE_KEY);
-    userForm = JSON.parse(userForm);
-    console.log(userForm);
-    localStorage.removeItem(STORAGE_KEY);
-    event.currentTarget.reset();
-  } 
-}
